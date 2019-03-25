@@ -17,6 +17,7 @@ import Device from '../entity/device'
 import Application from '../entity/application'
 import ApiKeys from './api-keys'
 import Link from './link'
+import Collaborators from './collaborators'
 
 /**
  * Applications Class provides an abstraction on all applications and manages
@@ -43,6 +44,20 @@ class Applications {
       update: 'application_ids.application_id',
     })
     this.Link = new Link(api.As)
+    this.Collaborators = new Collaborators(api.ApplicationAccess, {
+      list: 'application_id',
+    })
+
+    this.getAll = this.getAll.bind(this)
+    this.getById = this.getById.bind(this)
+    this.getByOrganization = this.getByOrganization.bind(this)
+    this.getByCollaborator = this.getByCollaborator.bind(this)
+    this.search = this.search.bind(this)
+    this.updateById = this.updateById.bind(this)
+    this.create = this.create.bind(this)
+    this.deleteById = this.deleteById.bind(this)
+    this.withId = this.withId.bind(this)
+    this.getRightsById = this.getRightsById.bind(this)
   }
 
   // Retrieval

@@ -66,8 +66,30 @@ const getApplicationApiKeyDataLogic = createLogic({
   },
 })
 
+const getApplicationCollaboratorsLogic = createLogic({
+  type: application.GET_APP_COLLABORATORS_LIST,
+  async process ({ getState, action }, dispatch, done) {
+    const { id } = action
+    try {
+      const res = await api.application.collaborators.list(id)
+      dispatch(
+        application.getApplicationCollaboratorsListSuccess(
+          id,
+          res.collaborators,
+          res.totalCount
+        )
+      )
+    } catch (e) {
+      dispatch(application.getApplicationCollaboratorsListFailure(id, e))
+    }
+
+    done()
+  },
+})
+
 export default [
   getApplicationLogic,
   getApplicationApiKeysLogic,
   getApplicationApiKeyDataLogic,
+  getApplicationCollaboratorsLogic,
 ]

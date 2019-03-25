@@ -24,6 +24,7 @@ import devices from './devices'
 import gateways from './gateways'
 import createNamedApiKeysReducer from './api-keys'
 import createNamedRightsReducer from './rights'
+import createNamedCollaboratorsReducer from './collaborators'
 
 export default combineReducers({
   user,
@@ -38,5 +39,8 @@ export default combineReducers({
   }),
   rights: combineReducers({
     applications: createNamedRightsReducer(APPLICATIONS_SHARED_NAME),
+  }),
+  collaborators: combineReducers({
+    applications: createNamedCollaboratorsReducer(APPLICATION_SHARED_NAME),
   }),
 })

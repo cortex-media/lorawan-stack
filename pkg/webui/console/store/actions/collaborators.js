@@ -28,6 +28,10 @@ export const createGetCollaboratorsListFailureActionType = name => (
   `GET_${name}_COLLABORATORS_LIST_FAILURE`
 )
 
+export const createGetCollaboratorActionType = name => (
+  `GET_${name}_COLLABORATOR`
+)
+
 export const getCollaboratorsList = name => (id, filters) => (
   { type: createGetCollaboratorsListActionType(name), id, filters }
 )
@@ -38,4 +42,8 @@ export const getCollaboratorsListSuccess = name => (id, collaborators, totalCoun
 
 export const getCollaboratorsListFailure = name => (id, error) => (
   { type: createGetCollaboratorsListFailureActionType(name), id, error }
+)
+
+export const getCollaborator = name => id => (
+  { type: createGetCollaboratorActionType(name), id }
 )

@@ -30,6 +30,8 @@ import {
   createGetCollaboratorsListFailureActionType,
   getCollaboratorsListSuccess,
   createGetCollaboratorsListSuccessActionType,
+  createGetCollaboratorActionType,
+  getCollaborator,
 } from '../actions/collaborators'
 
 export const SHARED_NAME = 'APPLICATION'
@@ -41,6 +43,7 @@ export const GET_APP_API_KEYS_LIST = createGetApiKeysListActionType(SHARED_NAME)
 export const GET_APP_API_KEYS_LIST_SUCCESS = createGetApiKeysListSuccessActionType(SHARED_NAME)
 export const GET_APP_API_KEYS_LIST_FAILURE = createGetApiKeysListFailureActionType(SHARED_NAME)
 export const GET_APP_API_KEY = createGetApiKeyActionType(SHARED_NAME)
+export const GET_APP_COLLABORATOR = createGetCollaboratorActionType(SHARED_NAME)
 export const GET_APP_COLLABORATORS_LIST = createGetCollaboratorsListActionType(SHARED_NAME)
 export const GET_APP_COLLABORATORS_LIST_SUCCESS = createGetCollaboratorsListSuccessActionType(SHARED_NAME)
 export const GET_APP_COLLABORATORS_LIST_FAILURE = createGetCollaboratorsListFailureActionType(SHARED_NAME)
@@ -70,3 +73,5 @@ export const getApplicationCollaboratorsList = getCollaboratorsList(SHARED_NAME)
 export const getApplicationCollaboratorsListSuccess = getCollaboratorsListSuccess(SHARED_NAME)
 
 export const getApplicationCollaboratorsListFailure = getCollaboratorsListFailure(SHARED_NAME)
+
+export const getApplicationCollaborator = getCollaborator(SHARED_NAME)

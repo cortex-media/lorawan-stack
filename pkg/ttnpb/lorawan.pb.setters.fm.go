@@ -784,47 +784,6 @@ func (dst *DataRate) SetFields(src *DataRate, paths ...string) error {
 	return nil
 }
 
-func (dst *RequestInfo) SetFields(src *RequestInfo, paths ...string) error {
-	for name, subs := range _processPaths(append(paths[:0:0], paths...)) {
-		switch name {
-		case "rx_window":
-			if len(subs) > 0 {
-				return fmt.Errorf("'rx_window' has no subfields, but %s were specified", subs)
-			}
-			if src != nil {
-				dst.RxWindow = src.RxWindow
-			} else {
-				var zero uint32
-				dst.RxWindow = zero
-			}
-		case "antenna_index":
-			if len(subs) > 0 {
-				return fmt.Errorf("'antenna_index' has no subfields, but %s were specified", subs)
-			}
-			if src != nil {
-				dst.AntennaIndex = src.AntennaIndex
-			} else {
-				var zero uint32
-				dst.AntennaIndex = zero
-			}
-		case "class":
-			if len(subs) > 0 {
-				return fmt.Errorf("'class' has no subfields, but %s were specified", subs)
-			}
-			if src != nil {
-				dst.Class = src.Class
-			} else {
-				var zero Class
-				dst.Class = zero
-			}
-
-		default:
-			return fmt.Errorf("invalid field: '%s'", name)
-		}
-	}
-	return nil
-}
-
 func (dst *TxSettings) SetFields(src *TxSettings, paths ...string) error {
 	for name, subs := range _processPaths(append(paths[:0:0], paths...)) {
 		switch name {
@@ -945,26 +904,15 @@ func (dst *TxSettings) SetFields(src *TxSettings, paths ...string) error {
 			} else {
 				dst.Time = nil
 			}
-		case "request_info":
+		case "antenna_index":
 			if len(subs) > 0 {
-				newDst := dst.RequestInfo
-				if newDst == nil {
-					newDst = &RequestInfo{}
-					dst.RequestInfo = newDst
-				}
-				var newSrc *RequestInfo
-				if src != nil {
-					newSrc = src.RequestInfo
-				}
-				if err := newDst.SetFields(newSrc, subs...); err != nil {
-					return err
-				}
+				return fmt.Errorf("'antenna_index' has no subfields, but %s were specified", subs)
+			}
+			if src != nil {
+				dst.AntennaIndex = src.AntennaIndex
 			} else {
-				if src != nil {
-					dst.RequestInfo = src.RequestInfo
-				} else {
-					dst.RequestInfo = nil
-				}
+				var zero uint32
+				dst.AntennaIndex = zero
 			}
 
 		default:

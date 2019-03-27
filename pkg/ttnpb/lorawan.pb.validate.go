@@ -1386,91 +1386,6 @@ var _ interface {
 	ErrorName() string
 } = DataRateValidationError{}
 
-// ValidateFields checks the field values on RequestInfo with the rules defined
-// in the proto definition for this message. If any rules are violated, an
-// error is returned.
-func (m *RequestInfo) ValidateFields(paths ...string) error {
-	if m == nil {
-		return nil
-	}
-
-	if len(paths) == 0 {
-		paths = RequestInfoFieldPathsNested
-	}
-
-	for name, subs := range _processPaths(append(paths[:0:0], paths...)) {
-		_ = subs
-		switch name {
-		case "rx_window":
-			// no validation rules for RxWindow
-		case "antenna_index":
-			// no validation rules for AntennaIndex
-		case "class":
-			// no validation rules for Class
-		default:
-			return RequestInfoValidationError{
-				field:  name,
-				reason: "invalid field path",
-			}
-		}
-	}
-	return nil
-}
-
-// RequestInfoValidationError is the validation error returned by
-// RequestInfo.ValidateFields if the designated constraints aren't met.
-type RequestInfoValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e RequestInfoValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e RequestInfoValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e RequestInfoValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e RequestInfoValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e RequestInfoValidationError) ErrorName() string { return "RequestInfoValidationError" }
-
-// Error satisfies the builtin error interface
-func (e RequestInfoValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sRequestInfo.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = RequestInfoValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = RequestInfoValidationError{}
-
 // ValidateFields checks the field values on TxSettings with the rules defined
 // in the proto definition for this message. If any rules are violated, an
 // error is returned.
@@ -1549,18 +1464,8 @@ func (m *TxSettings) ValidateFields(paths ...string) error {
 				}
 			}
 
-		case "request_info":
-
-			if v, ok := interface{}(m.GetRequestInfo()).(interface{ ValidateFields(...string) error }); ok {
-				if err := v.ValidateFields(subs...); err != nil {
-					return TxSettingsValidationError{
-						field:  "request_info",
-						reason: "embedded message failed validation",
-						cause:  err,
-					}
-				}
-			}
-
+		case "antenna_index":
+			// no validation rules for AntennaIndex
 		default:
 			return TxSettingsValidationError{
 				field:  name,

@@ -330,7 +330,6 @@
     - [MHDR](#ttn.lorawan.v3.MHDR)
     - [Message](#ttn.lorawan.v3.Message)
     - [RejoinRequestPayload](#ttn.lorawan.v3.RejoinRequestPayload)
-    - [RequestInfo](#ttn.lorawan.v3.RequestInfo)
     - [TxRequest](#ttn.lorawan.v3.TxRequest)
     - [TxSettings](#ttn.lorawan.v3.TxSettings)
     - [UplinkToken](#ttn.lorawan.v3.UplinkToken)
@@ -4196,23 +4195,6 @@ Only the components for which the keys were meant, will have the key-encryption-
 
 
 
-<a name="ttn.lorawan.v3.RequestInfo"></a>
-
-### RequestInfo
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| rx_window | [uint32](#uint32) |  |  |
-| antenna_index | [uint32](#uint32) |  |  |
-| class | [Class](#ttn.lorawan.v3.Class) |  |  |
-
-
-
-
-
-
 <a name="ttn.lorawan.v3.TxRequest"></a>
 
 ### TxRequest
@@ -4261,7 +4243,7 @@ On downlink, this is a scheduled transmission.
 | enable_crc | [bool](#bool) |  | Send a CRC in the packet; only on uplink; on downlink, CRC should not be enabled. |
 | timestamp | [uint32](#uint32) |  | Timestamp of the gateway concentrator when the uplink message was received, or when the downlink message should be transmitted (microseconds). On downlink, set timestamp to 0 and time to null to use immediate scheduling. |
 | time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Time of the gateway when the uplink message was received, or when the downlink message should be transmitted. For downlink, this requires the gateway to have GPS time synchronization. |
-| request_info | [RequestInfo](#ttn.lorawan.v3.RequestInfo) |  | Additional information for the downlink from the original TxRequest; necessary for the BasicStation LNS gateways. |
+| antenna_index | [uint32](#uint32) |  | Index of the antenna on which the uplink was received and/or downlink must be sent. |
 
 
 

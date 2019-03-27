@@ -30,6 +30,26 @@ class Collaborators {
 
     return Marshaler.payloadListResponse('collaborators', result)
   }
+
+  async add (entityId, data, mask = Marshaler.fieldMaskFromPatch(data)) {
+    const entityIdRoute = this._parentRoutes.set
+    const result = await this._api.SetCollaborator({
+      route: { [entityIdRoute]: entityId },
+    },
+    {
+      collaborator: data,
+    })
+
+    return Marshaler.payloadSingleResponse(result)
+  }
+
+  async update (entityId, data, mask = Marshaler.fieldMaskFromPatch(data)) {
+    return await this.add(entityId, data, mask)
+  }
+
+  async remove (entityId, data) {
+    return await this.add(entityId, { ...data, rights: []})
+  }
 }
 
 export default Collaborators

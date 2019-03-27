@@ -46,6 +46,7 @@ class Applications {
     this.Link = new Link(api.As)
     this.Collaborators = new Collaborators(api.ApplicationAccess, {
       list: 'application_id',
+      set: 'application_ids.application_id',
     })
 
     this.getAll = this.getAll.bind(this)
